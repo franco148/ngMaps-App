@@ -7,6 +7,10 @@ body{
   margin-bottom: 150px;
 }
 
+agm-map {
+  height: 600px;
+}
+
 .puntero{
   cursor: pointer;
 }
