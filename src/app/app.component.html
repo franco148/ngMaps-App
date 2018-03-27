@@ -10,17 +10,28 @@
     <div class="col-md-8">
       <!-- this creates a google map on the page with the given lat/lng from -->
       <!-- the component as the initial center of the map: -->
-      <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng"
+               (mapClick)="clickOnMap($event)">
+
+        <!-- agm-marker should have the following property [title]="marker.title"
+             for some reason is not workin in the example.
+        -->
+        <agm-marker *ngFor="let marker of _mapService.markers"
+                    [latitude]="marker.lat"
+                    [longitude]="marker.lng"
+                    [title]="marker.title"
+                    [markerDraggable]="marker.draggable">
           <agm-info-window>
-            <strong>Title</strong>
-            <p>
-              This is the an example of info Window.
+            <strong>{{ marker.title }}</strong>
+            <p *ngIf="marker.desc">
+              {{ marker.desc }}
             </p>
           </agm-info-window>
         </agm-marker>
+
       </agm-map>
+
     </div>
   </div>
-  
+
 </div>
