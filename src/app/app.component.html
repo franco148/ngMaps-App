@@ -5,7 +5,13 @@
   <div class="row">
     <div class="col-md-4">
 
-      <div *ngIf="selectedMarker">
+      <div *ngIf="!selectedMarker" class="animated fadeIn fast">
+        <div class="alert alert-info" role="alert">
+          <strong>Click</strong> in the mapto create a marker or select one.
+        </div>
+      </div>
+
+      <div *ngIf="selectedMarker" class="animated fadeIn fast">
         <h5>Marker</h5>
         <hr>
         <div class="form-group">
@@ -47,7 +53,7 @@
 
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-8 animated fadeIn fast">
       <!-- this creates a google map on the page with the given lat/lng from -->
       <!-- the component as the initial center of the map: -->
       <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng"
@@ -69,7 +75,7 @@
               {{ marker.desc }}
             </p>
             <p>
-              <a (click)="_mapService.removeMarker(idx)" class="text-danger puntero">Remove marker</a>
+              <a (click)="_mapService.removeMarker(idx); selectedMarker=null;" class="text-danger puntero">Remove marker</a>
             </p>
           </agm-info-window>
         </agm-marker>
