@@ -16,7 +16,7 @@ export class AppComponent {
   zoom:number = 18;
 
   constructor(private _mapService:MapsService) {
-
+    this._mapService.loadSavedMarkers();
   }
 
   clickOnMap(event) {
@@ -29,6 +29,22 @@ export class AppComponent {
     // console.log(event);
 
     this._mapService.addNewMarker(newMarker);
+  }
+
+  clickOnMarker(marker: Marker, index:number) {
+    console.log('clickOnMarker', marker, index);
+  }
+
+  dragEndMarker(marker: Marker, event) {
+    // console.log('dragEndMarker', marker, event);
+
+    let newlat = event.coords.lat;
+    let newlng = event.coords.lng;
+
+    marker.lat = newlat;
+    marker.lng = newlng;
+
+    this._mapService.saveMarkers();
   }
 }
 //-17.370407, -66.146319

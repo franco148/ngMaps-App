@@ -19,6 +19,19 @@ export class MapsService {
 
   addNewMarker(marker: Marker) {
     this.markers.push(marker);
+    this.saveMarkers();
+  }
+
+  saveMarkers() {
+    localStorage.setItem('markers', JSON.stringify(this.markers));
+  }
+
+  loadSavedMarkers() {
+    if (localStorage.getItem('markers')) {
+        this.markers = JSON.parse(localStorage.getItem('markers'));
+    } else {
+      this.markers = [];
+    }
   }
 
 }

@@ -16,11 +16,13 @@
         <!-- agm-marker should have the following property [title]="marker.title"
              for some reason is not workin in the example.
         -->
-        <agm-marker *ngFor="let marker of _mapService.markers"
+        <agm-marker *ngFor="let marker of _mapService.markers; let idx=index"
                     [latitude]="marker.lat"
                     [longitude]="marker.lng"
                     [title]="marker.title"
-                    [markerDraggable]="marker.draggable">
+                    [markerDraggable]="marker.draggable"
+                    (markerClick)="clickOnMarker(marker, idx)"
+                    (dragEnd)="dragEndMarker(marker, $event)">
           <agm-info-window>
             <strong>{{ marker.title }}</strong>
             <p *ngIf="marker.desc">
