@@ -34,4 +34,9 @@ export class MapsService {
     }
   }
 
+  removeMarker(index:number) {
+    this.markers.splice(index, 1);
+    this.saveMarkers();
+  }
+
 }
